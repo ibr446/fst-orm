@@ -1,4 +1,6 @@
 import asyncio
+from http.client import responses
+
 from db import init_db
 from config import get_settings
 from tortoise import Tortoise
@@ -6,6 +8,7 @@ from fastapi import FastAPI, HTTPException
 from schemas.user import BaseUser
 from schemas.base import BaseResponse
 from models.user import User
+from typing import List
 
 
 settings = get_settings()
@@ -40,6 +43,25 @@ async def get_user(user_id: int):
         "username": user.username
     }
     return BaseResponse(data=data)
+
+
+
+
+@app.get("/users", response_model=BaseResponse)
+async def get_all_users():
+    users = await User.all()
+    data = [
+        {
+            "id": user.id,
+            "name": user.name,
+            "email": user.email,
+            "username": user.username
+        }
+        for user in users
+    ]
+    return BaseResponse(data={"users": data})
+
+
 
 
 
