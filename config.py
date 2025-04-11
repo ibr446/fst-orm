@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     db_user: str
     db_pass: str
     db_name: str
+    database_url: str
 
     class Config:
         env_file = ".env"
@@ -22,6 +23,7 @@ class Settings(BaseSettings):
 @lru_cache()
 def get_settings():
     return Settings()
+
 
 
 
