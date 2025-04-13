@@ -3,12 +3,10 @@ from http.client import responses
 
 from db import init_db
 from config import get_settings
-from tortoise import Tortoise
 from fastapi import FastAPI, HTTPException
 from schemas.user import BaseUser
 from schemas.base import BaseResponse
 from models.user import User
-from typing import List
 
 
 settings = get_settings()
@@ -20,6 +18,15 @@ app = FastAPI(
     description="FastApi CRUD Tortoise-orm with aerich",
     debug=settings.app_debug
 )
+
+
+
+
+@app.get("/api/user")
+def read_user():
+    return {"message": "Hello User!"}
+
+
 
 
 
