@@ -1,12 +1,16 @@
 from main import app
-from fastapi.testclient import TestClient
-
+from starlette.testclient import TestClient
 
 client = TestClient(app)
 
 
-def test_read_main():
-    response = client.get("/api/users")
+def test_read_user():
+    response = client.get("/api/user")
     assert response.status_code == 200
+    assert response.json() == {"message": "Hello User!"}
+
+
+
+
 
 
