@@ -22,6 +22,11 @@ app = FastAPI(
 
 
 
+@app.get("/api/user")
+def read_user():
+    return {"message": "Hello User!"}
+
+
 
 @app.on_event("startup")
 async def startup():
